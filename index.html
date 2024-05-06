@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Jacquard+12+Charted&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=VT323&display=swap');
+    </style>
+<style>
+    body {
+        font-family: 'Roboto Mono', monospace;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f1f1f1;
+    }
+    canvas {
+        border: 1px solid #000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <canvas width="800" height="700"></canvas>
+    <script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+        function createCircle(x, y) {
+            ctx.beginPath();
+            ctx.arc(x, y, 50*Math.random(), 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.fill();
+            ctx.closePath();
+        }
+        function handleMove(e) {
+            x = e.offsetX||e.touches[0].clientX;
+            y = e.offsetY||e.touches[0].clientY;
+            createCircle(x, y);
+        }
+        canvas.addEventListener('mousemove', (e) => {
+            handleMove(e);
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            handleMove(e);
+        });
+    </script>
+</body>
+</html>
